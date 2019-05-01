@@ -53,8 +53,7 @@ var connection = mysql.createConnection({
     //add these data to database
     connection.connect();
     var post  = {"url":url, "response_code":response_code, "dns_time":dns_time, "ipadress":ipadress, "date":date, "error":error, "response_time":response_time,};
-    connection.query('insert into 'url_metrics'('url','response_code','response_time','dns_time','ipadress','date','error') values(?,?,?,?,?,?,?);'),post,
-  function (error, results, fields) {
+    connection.query('insert into 'url_metrics'('url','response_code','response_time','dns_time','ipadress','date','error') values(%s,%s,%s,%s,%s,%s,%s);',post,  function (error, results, fields) {
     // if (error) throw error;
     console.log('done',results);
   });
@@ -65,7 +64,3 @@ var connection = mysql.createConnection({
 
     res.send(url + "This url is added to dataBase");
 });
-
-
-
-

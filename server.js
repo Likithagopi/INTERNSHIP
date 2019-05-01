@@ -5,7 +5,7 @@ var mysql = require("mysql");
 let app = express();
 
 app.listen(8080);
-
+//new fix
 var mysql = require("mysql");
 var pool = mysql.createPool({
   host: "remotemysql.com",

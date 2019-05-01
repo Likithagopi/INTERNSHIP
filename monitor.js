@@ -4,7 +4,7 @@ var mysql = require("mysql");
 
 let app = express();
 
-app.listen(3000);
+app.listen(8080);
 
 var mysql = require("mysql");
 var pool = mysql.createPool({
@@ -14,16 +14,16 @@ var pool = mysql.createPool({
   database: "Ybi1BVrtgr"
 });
 
-app.get("/", function(req, res) {
+app.get("/*", function(req, res) {
   var start = new Date();
 
   var url = req.protocol + "://" + req.get("host") + req.originalUrl;
   var response_code = "200";
   var dns_time = start;
   var ipadress = req.ip;
-  var date = new Date().getHours();
+  var date = start;
   var error = "NULL";
-  var response_time = new Date() - start;
+  var response_time = ".02";
   pool.getConnection(function(err, connection) {
     //Time Start for calculating response time
 
@@ -45,5 +45,5 @@ app.get("/", function(req, res) {
       if (error) throw error;
     });
   });
-  res.send(url + "This url is added to dataBase");
+  res.send(url + " is added to dataBase");
 });

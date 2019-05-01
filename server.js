@@ -20,7 +20,7 @@ app.get("/*", function(req, res) {
   var url = req.protocol + "://" + req.get("host") + req.originalUrl;
   var response_code = "200";
   var dns_time = start;
-  var ipadress = req.ip;
+  var ipadress = "127.0.0.1";
   var date = start;
   var error = "NULL";
   var response_time = ".02";

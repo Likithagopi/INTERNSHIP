@@ -67,7 +67,7 @@ connection.query(sql,post);
   
 
 
-    //res.send(url + "This url is added to dataBase");
+    res.send(url + "This url is added to dataBase");
 });
 
 

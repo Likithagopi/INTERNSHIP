@@ -19,7 +19,7 @@ app.all("/*", function(req, res, next) {
   });
 
 //express module config
-app.use(body_parser.json());
+// app.use(body_parser.json());
 
 //Database config 
 var connection = mysql.createConnection({
@@ -29,6 +29,9 @@ var connection = mysql.createConnection({
     database : 'Ybi1BVrtgr'
   });
 
+  connection.on('error', function(err) {
+    console.log(err);
+});
 //Database connection
   connection.connect();
 
@@ -51,19 +54,20 @@ var connection = mysql.createConnection({
     var response_time	=new Date() - start
 
     //add these data to database
-    connection.connect();
-    var post  = {"url":url, "response_code":response_code, "dns_time":dns_time, "ipadress":ipadress, "date":date, "error":error, "response_time":response_time,};
-    connection.query('insert into 'url_metrics'('url','response_code','response_time','dns_time','ipadress','date','error') values(?,?,?,?,?,?,?);'),post,
-  function (error, results, fields) {
-    // if (error) throw error;
-    console.log('done',results);
-  });
+    
+    let sql = 'INSERT INTO `url_metrics` (`url`, `response_code`, `response_time`, `dns_time`, `ipadress`, `date`, `error`) VALUES (?, ?, ?, ?, ?, ?, ?);';
+ 
+// execute the insert statment
+var post  = {"url":url, "response_code":response_code, "dns_time":dns_time, "ipadress":ipadress, "date":date, "error":error, "response_time":response_time};
+connection.query(sql,post);
+
+    
     
   console.log(post);
   
 
 
-    res.send(url + "This url is added to dataBase");
+    //res.send(url + "This url is added to dataBase");
 });
 
 
